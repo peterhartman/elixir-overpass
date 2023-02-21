@@ -17,43 +17,46 @@ defmodule Overpass.API do
   Returns a tuple `{:ok, {:xml, body}}` or `{:ok, {:json, body}}` on success
   or `{:error, error}` on error.
   """
-  @spec query(String.t) :: {:ok, {:json, String.t}}
-  @spec query(String.t) :: {:ok, {:xml, String.t}}
-  @spec query(String.t) :: {:error, String.t}
+  @spec query(String.t()) :: {:ok, {:json, String.t()}}
+  @spec query(String.t()) :: {:ok, {:xml, String.t()}}
+  @spec query(String.t()) :: {:error, String.t()}
   def query(query) do
     Logger.debug("Query: #{query}")
-    HTTPoison.post(@url, query, [], [timeout: 30_000, recv_timeout: 30_000]) |> process_response()
+    HTTPoison.post(@url, query, [], timeout: 30_000, recv_timeout: 30_000) |> process_response()
   end
 
   defp process_response({
-    :ok,
-    %HTTPoison.Response{
-      status_code: 200,
-      body: body,
-      headers: headers}
-      }) do
-      Logger.debug("status_code: 200")
-      %{"Content-Type" => content_type} = Enum.into(headers, %{})
-      case content_type do
-        "application/osm3s+xml" -> {:ok, {:xml, body}}
-        "application/json" -> {:ok, {:json, body}}
-        _ -> {:error, "Unsuported Content-Type"}
-      end
-      end
+         :ok,
+         %HTTPoison.Response{
+           status_code: 200,
+           body: body,
+           headers: headers
+         }
+       }) do
+    Logger.debug("status_code: 200")
+    %{"Content-Type" => content_type} = Enum.into(headers, %{})
 
-      defp process_response({
-        :ok,
-        %HTTPoison.Response{
-        status_code: code,
-        body: _body,
-        headers: _headers}
-      }) do
+    case content_type do
+      "application/osm3s+xml" -> {:ok, {:xml, body}}
+      "application/json" -> {:ok, {:json, body}}
+      _ -> {:error, "Unsuported Content-Type"}
+    end
+  end
+
+  defp process_response({
+         :ok,
+         %HTTPoison.Response{
+           status_code: code,
+           body: _body,
+           headers: _headers
+         }
+       }) do
     Logger.error("status_code: #{code}")
     {:error, "status_code: #{code}"}
-      end
+  end
 
-      defp process_response({:error, error}) do
-        Logger.error(error)
-        {:error, error}
-      end
+  defp process_response({:error, error}) do
+    Logger.error(error)
+    {:error, error}
+  end
 end

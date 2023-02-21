@@ -4,20 +4,22 @@ defmodule Overpass.Mixfile do
   @version "0.2.1"
 
   def project do
-    [app: :overpass,
-     version: @version,
-     elixir: "~> 1.4",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     name: "Elixir-Overpass",
-     source_url: "https://github.com/CodeforChemnitz/elixir-overpass",
-     description: description(),
-     package: package(),
-     deps: deps(),
-     docs: [ extras: ["README.md"],
-             source_ref: "v#{@version}",
-             source_url: "https://github.com/CodeforChemnitz/elixir-overpass"
-           ]
+    [
+      app: :overpass,
+      version: @version,
+      elixir: "~> 1.4",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      name: "Elixir-Overpass",
+      source_url: "https://github.com/CodeforChemnitz/elixir-overpass",
+      description: description(),
+      package: package(),
+      deps: deps(),
+      docs: [
+        extras: ["README.md"],
+        source_ref: "v#{@version}",
+        source_url: "https://github.com/CodeforChemnitz/elixir-overpass"
+      ]
     ]
   end
 
@@ -37,7 +39,7 @@ defmodule Overpass.Mixfile do
       {:ex_doc, "~> 0.29.1", only: :dev},
 
       # Dev
-      {:dogma, "~> 0.1.16", only: :dev},
+      {:dogma, "~> 0.1.16", only: :dev}
     ]
   end
 
@@ -48,10 +50,14 @@ defmodule Overpass.Mixfile do
   end
 
   defp package do
-    [# These are the default files included in the package
-     maintainers: ["Tobias Gall", "Ronny Hartenstein"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/CodeforChemnitz/elixir-overpass",
-              "Docs" => "http://codeforchemnitz.de/elixir-overpass/doc/"}]
+    # These are the default files included in the package
+    [
+      maintainers: ["Tobias Gall", "Ronny Hartenstein"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/CodeforChemnitz/elixir-overpass",
+        "Docs" => "http://codeforchemnitz.de/elixir-overpass/doc/"
+      }
+    ]
   end
 end
