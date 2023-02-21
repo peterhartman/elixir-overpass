@@ -1,5 +1,5 @@
 defmodule OverpassParserTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Overpass.Parser
 
   test "Overpass.Parser Error" do

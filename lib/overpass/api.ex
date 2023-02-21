@@ -22,7 +22,7 @@ defmodule Overpass.API do
   @spec query(String.t) :: {:error, String.t}
   def query(query) do
     Logger.debug("Query: #{query}")
-    HTTPoison.post(@url, query) |> process_response()
+    HTTPoison.post(@url, query, [], [timeout: 30_000, recv_timeout: 30_000]) |> process_response()
   end
 
   defp process_response({

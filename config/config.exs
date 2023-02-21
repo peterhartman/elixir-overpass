@@ -1,3 +1,3 @@
-use Mix.Config
+import Config
 
-config :overpass, url: "http://overpass-api.de/api/interpreter"
+config :overpass, url: "https://overpass-api.de/api/interpreter"

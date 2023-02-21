@@ -27,17 +27,17 @@ defmodule Overpass.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 0.11.1"},
-      {:sweet_xml, "~> 0.6.5"},
-      {:jsx, "~> 2.8"},
+      {:httpoison, "~> 2.0.0"},
+      {:sweet_xml, "~> 0.7.3"},
+      {:jsx, "~> 3.1.0"},
 
       # Doc
-      {:inch_ex, "~> 0.5.6", only: :dev},
-      {:earmark, "~> 1.2.0", only: :dev},
-      {:ex_doc, "~> 0.15.0", only: :dev},
+      {:inch_ex, "~> 2.0.0", only: :dev},
+      {:earmark, "~> 1.4.36", only: :dev},
+      {:ex_doc, "~> 0.29.1", only: :dev},
 
       # Dev
-      {:dogma, "~> 0.1.14", only: :dev},
+      {:dogma, "~> 0.1.16", only: :dev},
     ]
   end
 

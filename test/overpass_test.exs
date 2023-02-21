@@ -1,5 +1,5 @@
 defmodule OverpassTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   require Logger
   doctest Overpass
 

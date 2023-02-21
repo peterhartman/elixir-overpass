@@ -1,5 +1,5 @@
 defmodule OverpassAPITest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Overpass.API
 
   test "Overpass.API Error" do
